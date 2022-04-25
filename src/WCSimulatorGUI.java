@@ -295,7 +295,7 @@ class WCSimulatorGUI {
 	
 	// establish connection to sqlite database file
 	public Connection connect() {
-		String url = "jdbc:sqlite:" + this.getClass().getResource("Teams.db").getPath();
+		String url = "jdbc:sqlite:resources/Teams.db";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url);
