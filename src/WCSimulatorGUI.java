@@ -295,7 +295,7 @@ class WCSimulatorGUI {
 	
 	// establish connection to sqlite database file
 	public Connection connect() {
-		String url = "jdbc:sqlite:resources/Teams.db";
+		String url = "jdbc:sqlite:src/resources/Teams.db";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(url);
@@ -404,7 +404,7 @@ class WCSimulatorGUI {
 	// read the data file for the given team and return an array of all their stat values
 	private String[] parseCSVData(String teamName) {
 		try {
-			BufferedReader reader = new BufferedReader(new FileReader(this.getClass().getResource("TeamData.csv").getPath()));
+			BufferedReader reader = new BufferedReader(new FileReader("src/resources/TeamData.csv"));
 			String[] tokens = null;
 			String line = null;
 			while ((line = reader.readLine()) != null)
@@ -473,11 +473,11 @@ class WCSimulatorGUI {
 		con.setBackground(new Color(35, 2, 19));
 		
 		try {
-			titleFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("Qatar2022Arabic-Heavy.ttf")).deriveFont(65f);
-			textFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("Qatar2022Arabic-Bold.ttf")).deriveFont(36f);
-			buttonFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("Qatar2022Arabic-Bold.ttf")).deriveFont(22f);
-			userTeamFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("Qatar2022Arabic-Heavy.ttf")).deriveFont(26f);
-			statFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("Qatar2022Arabic-Bold.ttf")).deriveFont(16f);
+			titleFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("resources/Qatar2022Arabic-Heavy.ttf")).deriveFont(65f);
+			textFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("resources/Qatar2022Arabic-Bold.ttf")).deriveFont(36f);
+			buttonFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("resources/Qatar2022Arabic-Bold.ttf")).deriveFont(22f);
+			userTeamFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("resources/Qatar2022Arabic-Heavy.ttf")).deriveFont(26f);
+			statFont = Font.createFont(Font.TRUETYPE_FONT, getClass().getClassLoader().getResourceAsStream("resources/Qatar2022Arabic-Bold.ttf")).deriveFont(16f);
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(titleFont);
 			ge.registerFont(textFont);
@@ -3159,7 +3159,7 @@ class WCSimulatorGUI {
 	// create a JLabel with a GIF
 	public JLabel playGIF(String mediaURL) {
 		try {
-			Icon imgIcon = new ImageIcon(this.getClass().getResource("/" + mediaURL));
+			Icon imgIcon = new ImageIcon("src/resources/" + mediaURL);
 			JLabel gifLabel = new JLabel(imgIcon);
 			return gifLabel;
 		} catch (Exception e) {
@@ -3173,11 +3173,11 @@ class WCSimulatorGUI {
 		try {
 			if (mediaURL.equals("buttonClick.wav")) {
 				buttonClip = AudioSystem.getClip();
-				buttonClip.open(AudioSystem.getAudioInputStream(this.getClass().getResource("/" + mediaURL)));
+				buttonClip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("resources/" + mediaURL)));
 				buttonClip.start();
 			} else {
 				clip = AudioSystem.getClip();
-				clip.open(AudioSystem.getAudioInputStream(this.getClass().getResource("/" + mediaURL)));
+				clip.open(AudioSystem.getAudioInputStream(getClass().getResourceAsStream("resources/" + mediaURL)));
 				clip.start();
 				if (mediaURL.equals("mainMusic.wav")) clip.loop(clip.LOOP_CONTINUOUSLY);
 			}
